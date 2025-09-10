@@ -1,7 +1,6 @@
 package org.example.orm_final.entity;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -13,18 +12,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity(name = "Student")
-public class Student {
+@Entity(name ="user" )
+public class User {
     @Id
-    @Column(name = "stu_ID")
+    @Column(name = "user_ID")
     private String id;
 
-    @Embedded
-    private FullName fullName;
+    @Column(name = "User_type")
+    private UserType userType;
 
-    @Column(nullable = false)
-    int age;
+    @Column(name = "user_name",unique = true)
+    private String userName;
 
-    @Column(nullable = false,unique = true,length = 12)
-    String nic;
+    @Column(name = "password")
+    private String passWold;
+
 }

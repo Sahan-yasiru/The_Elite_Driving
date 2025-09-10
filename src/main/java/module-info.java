@@ -7,6 +7,8 @@ module org.example.orm_final {
     requires org.hibernate.orm.core;
     requires jakarta.persistence;
     requires java.naming;
+    requires static lombok;
+    requires bcrypt;
 
     opens org.example.orm_final to javafx.fxml;
     opens org.example.orm_final.entity;

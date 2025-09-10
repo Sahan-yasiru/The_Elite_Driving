@@ -13,18 +13,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity(name = "Student")
-public class Student {
+@Entity(name = "Instructors")
+public class Instructor {
     @Id
-    @Column(name = "stu_ID")
+    @Column(name = "Instructor_ID")
     private String id;
 
     @Embedded
     private FullName fullName;
 
-    @Column(nullable = false)
-    int age;
 
-    @Column(nullable = false,unique = true,length = 12)
-    String nic;
+
 }

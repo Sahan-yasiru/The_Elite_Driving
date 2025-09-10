@@ -1,10 +1,10 @@
-package org.example.orm_final.db;
+package org.example.orm_final.dao.util;
 
 import org.example.orm_final.entity.Student;
+import org.example.orm_final.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.mapping.Property;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -24,6 +24,8 @@ public class FactoryConfiguration {
 //        configuration.configure();
 
         configuration.addAnnotatedClass(Student.class);
+        configuration.addAnnotatedClass(User.class);
+
 
         sessionFactory=configuration.buildSessionFactory();
     }
