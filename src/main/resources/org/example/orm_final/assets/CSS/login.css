@@ -1,0 +1,37 @@
+.background{
+    -fx-background-color: #333446;
+}
+.img{
+    -fx-background-radius: 30px;
+}
+.text{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+}
+#btn_login{
+    -fx-background-color: #00ffd5;
+    -fx-text-fill: black;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+    -fx-font-weight: bold;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-border-style: dashed;
+}
+#btn-02{
+    -fx-background-color: #f6d700;
+    -fx-text-fill: black;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+
+}
+.border{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+}
