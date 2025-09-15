@@ -1,16 +1,14 @@
-package org.example.orm_final.model;
+package org.example.orm_final.model.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class DtoUser {
-    private String id;
+    private int id;
     private DtoUserType userType;
     private String userName;
     private String passWold;

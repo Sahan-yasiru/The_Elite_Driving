@@ -1,8 +1,6 @@
-package org.example.orm_final.entity;
+package org.example.orm_final.entity.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +14,7 @@ import lombok.Setter;
 public class User {
     @Id
     @Column(name = "user_ID")
-    private String id;
+    private int id;
 
     @Column(name = "User_type")
     private UserType userType;

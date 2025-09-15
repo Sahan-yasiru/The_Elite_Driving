@@ -28,10 +28,24 @@
 
 }
 .border{
-    -fx-text-fill: white;
     -fx-font-size: 20px;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
     -fx-border-color: white;
     -fx-border-width: 1px;
+    -fx-background-color: #333446;
+    -fx-text-fill: white;
+}
+.border:focused {
+    -fx-control-inner-background: #333446;
+    -fx-border-radius: 20px;
+    -fx-border-color: white;
+
+}
+
+.box{
+    -fx-border-color: FFFFF0;
+    -fx-border-radius: 20;
+    -fx-border-width:2;
+    -fx-background-color: transparent;
 }

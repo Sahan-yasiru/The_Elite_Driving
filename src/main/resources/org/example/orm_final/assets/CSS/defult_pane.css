@@ -1,0 +1,46 @@
+.backgraund{
+    -fx-background-color: #DEE791;
+    -fx-border-color: #78C841;
+    -fx-border-radius: 20px;
+    -fx-border-width: 5px;
+    -fx-background-radius: 20px;
+
+}
+.box{
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: white;
+    -fx-background-color: #4A9782;
+}
+.label{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+.textBox{
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-background-color: #333446;
+    -fx-text-alignment: center;
+    -fx-background-radius: 10px;
+
+}
+.pri{
+    -fx-text-alignment: center;
+    -fx-text-fill: #ffe500;
+
+}
+.button{
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-font-size: 20px;
+}
+.cmbBox{
+    -fx-background-radius: 10px;
+
+}

@@ -44,7 +44,7 @@
             <Image url="@../assets/images/img.png" />
          </image>
       </ImageView>
-      <VBox layoutX="185.0" layoutY="189.0" prefHeight="142.0" prefWidth="454.0" spacing="20.0" style="-fx-border-color: FFFFF0; -fx-border-radius: 20; -fx-border-width: 2;">
+      <VBox layoutX="185.0" layoutY="189.0" prefHeight="155.0" prefWidth="454.0" spacing="30.0" styleClass="box" stylesheets="@../assets/CSS/login.css">
          <children>
             <HBox prefHeight="30.0" prefWidth="334.0" spacing="5.0">
                <children>

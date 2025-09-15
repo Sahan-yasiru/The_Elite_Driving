@@ -1,0 +1,23 @@
+.background{
+    -fx-background-color: #FFFFF0;
+}
+.bar{
+    -fx-background-color: #1c5e5e;
+    -fx-background-radius: 0px 20px 20px 0px ;
+    /*-fx-border-color: #000000;*/
+    /*-fx-border-style: ;*/
+    -fx-border-width: 7px 7px 7px 0px;
+    -fx-border-radius: 0px 10px 10px 0px ;
+
+}
+.button{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: white;
+    -fx-border-width: 5px;
+
+}
