@@ -5,41 +5,78 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import org.example.orm_final.bo.BOFactory;
-import org.example.orm_final.bo.custom.UserBO;
+import org.example.orm_final.bo.custom.CourseBO;
+import org.example.orm_final.bo.custom.InstructorBO;
+import org.example.orm_final.bo.custom.impl.CourseBOImpl;
+import org.example.orm_final.bo.custom.impl.InstructorBOImpl;
 import org.example.orm_final.bo.utill.converter.DtoToTMConverter;
-import org.example.orm_final.model.user.DtoUser;
-import org.example.orm_final.model.user.DtoUserType;
-import org.example.orm_final.view.user.TMUserType;
-import org.example.orm_final.view.user.UserTM;
+import org.example.orm_final.model.DtoCourse;
+import org.example.orm_final.model.DtoInstructor;
+import org.example.orm_final.view.CourseTM;
+import org.example.orm_final.view.instructor.InstructorTM;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class InstructorManagementController implements Initializable {
     @FXML
-    private TableColumn colID, colUName, colPassWord, colUType;
+    private TableColumn colID, colName, colNic;
     @FXML
-    private TableView<UserTM> tableView;
+    private TableColumn<InstructorTM, List<VBox>> colCourses;
     @FXML
-    private ComboBox cmbType;
+    private TableView<InstructorTM> tableView;
     @FXML
-    private TextField txtPassword, txtUserName;
+    private ListView<String> couList;
+    @FXML
+    private TextField txtNIC, txtUserName;
     @FXML
     private Label lblID;
     @FXML
     private Button btnSave, btnUpdate, btnDelete;
-    private UserBO userBO = (UserBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.User);
+    private InstructorBO instructorBO = (InstructorBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.Instructor);
+    private CourseBO courseBO = (CourseBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.Course);
     private String id;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String[] colNames = {"Id","userType","userName","passWold"};
-        TableColumn[] controls={colID,colUType,colUName,colPassWord};
-        for (int i = 0; i <colNames.length ; i++) {
+        couList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        String[] colNames = {"Id", "name", "nic"};
+        TableColumn[] controls = {colID, colName, colNic};
+        for (int i = 0; i < colNames.length; i++) {
             controls[i].setCellValueFactory(new PropertyValueFactory<>(colNames[i]));
         }
+        colCourses.setCellValueFactory(new PropertyValueFactory<>("courses"));
+        colCourses.setCellFactory(col -> new TableCell<InstructorTM, List<VBox>>() {
+            private final HBox hbox = new HBox(5); // use HBox if you want VBox items in a row
+
+            @Override
+            protected void updateItem(List<VBox> vboxes, boolean empty) {
+                super.updateItem(vboxes, empty);
+                if (empty || vboxes == null || vboxes.isEmpty()) {
+                    setGraphic(null);
+                } else {
+                    hbox.getChildren().setAll(vboxes); // clear and add all VBoxes
+                    setGraphic(hbox);
+                }
+            }
+        });
+
+
+//        colCourses.setCellFactory(col -> new TableCell<InstructorTM, List<HBox>>() {
+//            @Override
+//            protected void updateItem(List<HBox> item, boolean empty) {
+//                super.updateItem(item, empty);
+////                item.ge
+//            }
+//        });
+
+
         reLode();
         btnSave.setOnAction(event -> {
             save();
@@ -53,51 +90,68 @@ public class InstructorManagementController implements Initializable {
         lordTable();
         btnDelete.setDisable(true);
         btnUpdate.setDisable(true);
+
+
     }
 
-    public void delete(){
-        if(!lblID.getText().isEmpty()){
+    public void delete() {
+        if(!tableView.getSelectionModel().getSelectedItem().getId().isEmpty()){
             try {
-                DtoUser dtoUser=new DtoUser(Integer.parseInt(lblID.getText()),
-                        cmbType.getValue().equals("ADMIN") ? DtoUserType.Admin : DtoUserType.Receptionist,
-                        txtUserName.getText(), txtPassword.getText());
-                boolean b=userBO.delete(dtoUser);
+                DtoInstructor dtoInstructor=new DtoInstructor();
+                dtoInstructor.setId(tableView.getSelectionModel().getSelectedItem().getId());
+                boolean b= instructorBO.delete(dtoInstructor);
+                if(b){
+                    tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
+                }
                 new Alert(Alert.AlertType.INFORMATION,b?"deleted":"Failed").show();
                 reLode();
             } catch (Exception e) {
+                e.printStackTrace();
                 new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
             }
         }
     }
 
     public void reLode() {
+        btnSave.setDisable(false);
+        couList.getItems().clear();
         try {
-            id=userBO.getID();
+            id = instructorBO.getLastID();
+            courseBO.getAll().forEach(dtoCourse -> {
+                couList.getItems().add(dtoCourse.getId());
+            });
             lblID.setText(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        cmbType.getItems().clear();
-        cmbType.getItems().add("ADMIN");
-        cmbType.getItems().add("Receptionist");
+
         btnDelete.setDisable(true);
         btnUpdate.setDisable(true);
         clearText();
-        lordTable();
     }
 
     public void save() {
         if (!chackEmpty()) {
-            try {
-                DtoUser dtoUser=new DtoUser(Integer.parseInt(id),
-                        cmbType.getValue().equals("ADMIN") ? DtoUserType.Admin : DtoUserType.Receptionist,
-                        txtUserName.getText(), txtPassword.getText());
-                boolean b = userBO.save(dtoUser);
-                new Alert(Alert.AlertType.INFORMATION,b?"saved":"Failed").show();
-                dtoUser.setId(Integer.parseInt(id));
-                if(b){
-                    tableView.getItems().add(DtoToTMConverter.getUserTM(dtoUser));
+            DtoInstructor dtoInstructor = new DtoInstructor();
+            dtoInstructor.setName(txtUserName.getText());
+            dtoInstructor.setNic(txtNIC.getText());
+            dtoInstructor.setId(lblID.getText());
+            List<DtoCourse> dtoCourses=new ArrayList<>();
+            for (String selectedItem : couList.getSelectionModel().getSelectedItems()) {
+                DtoCourse dtoCourse=new DtoCourse();
+                if(selectedItem.isEmpty()){
+                    continue;
                 }
+                dtoCourse.setId(selectedItem);
+                dtoCourses.add(dtoCourse);
+            }
+            dtoInstructor.setCourses(dtoCourses);
+            try {
+                boolean b=instructorBO.save(dtoInstructor);
+                if(b){
+                    tableView.getItems().add(DtoToTMConverter.getInstructorTM(dtoInstructor));
+                }
+                new Alert(Alert.AlertType.INFORMATION,b?"saved":"Failed to save",ButtonType.OK).show();
                 reLode();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -108,54 +162,75 @@ public class InstructorManagementController implements Initializable {
     }
 
     public boolean chackEmpty() {
-        return txtPassword.getText().isEmpty() ? true : txtUserName.getText().isEmpty() ? true : cmbType.getValue() == null ? true : false;
+        return txtUserName.getText().isEmpty() || txtNIC.getText().isEmpty() || couList.getSelectionModel().getSelectedItems() == null;
     }
 
     public void clearText() {
-        txtPassword.clear();
+        txtNIC.clear();
         txtUserName.clear();
-        cmbType.setValue(null);
+        couList.getSelectionModel().getSelectedItems().clear();
     }
 
     public void lordTable() {
 
         try {
             tableView.getItems().clear();
-            userBO.getAll().forEach(dtoUser -> {
-                tableView.getItems().add(DtoToTMConverter.getUserTM(dtoUser));
+            instructorBO.getAll().forEach(dtoInstructor -> {
+                tableView.getItems().add(DtoToTMConverter.getInstructorTM(dtoInstructor));
             });
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
-    public void update(){
-        if(!chackEmpty()){
-            DtoUser dtoUser=new DtoUser(Integer.parseInt(lblID.getText()),
-                    cmbType.getValue().equals("ADMIN") ? DtoUserType.Admin : DtoUserType.Receptionist,
-                    txtUserName.getText(), txtPassword.getText());
 
+    public void update() {
+        if (!chackEmpty()) {
+            DtoInstructor dtoInstructor = new DtoInstructor(lblID.getText(),
+                    txtUserName.getText(),
+                    txtNIC.getText(), null);
+            List<DtoCourse> dtoCourses = new ArrayList<>();
+            couList.getSelectionModel().getSelectedItems().forEach(selectedItem -> {
+                DtoCourse dtoCourse = new DtoCourse();
+                dtoCourse.setId(selectedItem);
+                dtoCourses.add(dtoCourse);
+            });
+            dtoInstructor.setCourses(dtoCourses);
             try {
-                boolean b = userBO.update(dtoUser);
-                if(b){
-                    new Alert(Alert.AlertType.INFORMATION,"successfully Updated").show();
+                boolean b = instructorBO.update(dtoInstructor);
+                if (b) {
+                    tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
+                    tableView.getItems().add(DtoToTMConverter.getInstructorTM(dtoInstructor));
+                    new Alert(Alert.AlertType.INFORMATION, "successfully Updated").show();
                     reLode();
                 }
-            }catch (Exception e){
-                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
+        } else {
+
         }
     }
 
     public void tableclicked(MouseEvent event) {
+        couList.getSelectionModel().clearSelection();
         btnSave.setDisable(true);
         btnUpdate.setDisable(false);
         btnDelete.setDisable(false);
-        UserTM userTM=tableView.getSelectionModel().getSelectedItem();
-        if(userTM!=null){
-            lblID.setText(userTM.getId()+"");
-            txtUserName.setText(userTM.getUserName());
-            cmbType.setValue(userTM.getUserType().equals(TMUserType.Admin)?"ADMIN":"Receptionist");
+        InstructorTM instructorTM=tableView.getSelectionModel().getSelectedItem();
+        if(instructorTM!=null){
+            lblID.setText(instructorTM.getId()+"");
+            txtUserName.setText(instructorTM.getName());
+            txtNIC.setText(instructorTM.getNic());
+            instructorTM.getCourses().forEach(vBox -> {
+                vBox.getChildren().forEach(node -> {
+                    if (node instanceof Label li) {
+                        String courseId = li.getText().trim();
+                        if (couList.getItems().contains(courseId)) {
+                            couList.getSelectionModel().select(courseId);
+                        }
+                    }
+                });
+            });
         }
     }
 

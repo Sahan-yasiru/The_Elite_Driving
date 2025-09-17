@@ -1,9 +1,12 @@
 package org.example.orm_final.view.user;
 
+import javafx.scene.control.Button;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,6 +17,7 @@ public class UserTM {
     private TMUserType userType;
     private String userName;
     private String passWold;
+
 
 }
 

@@ -1,5 +1,7 @@
 package org.example.orm_final.dao.util;
 
+import org.example.orm_final.entity.Course;
+import org.example.orm_final.entity.Instructor;
 import org.example.orm_final.entity.user.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,6 +30,8 @@ public class FactoryConfiguration {
 //        configuration.configure();
 
         configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Instructor.class);
+        configuration.addAnnotatedClass(Course.class);
 
 
         sessionFactory=configuration.buildSessionFactory();

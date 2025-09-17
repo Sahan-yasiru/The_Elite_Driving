@@ -117,10 +117,14 @@ public class UserDAOImpl implements UserDAO {
     public String getLastID() throws SQLException {
 
        Session session=factoryConfiguration.getSession();
-       Query<Integer> query=session.createQuery("SELECT id FROM user ORDER BY id DESC LIMIT 1",Integer.class);
-       int id= query.getSingleResult();
-       session.close();
-       return id+"";
+       try {
+           Query<Integer> query = session.createQuery("SELECT id FROM user ORDER BY id DESC LIMIT 1", Integer.class);
+           int id = query.getSingleResult();
+           session.close();
+           return id + "";
+       }finally {
+           session.close();
+       }
     }
 
 

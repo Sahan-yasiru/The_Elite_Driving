@@ -8,14 +8,14 @@
 
 <AnchorPane prefHeight="716.0" prefWidth="1252.0" styleClass="background" stylesheets="@../assets/CSS/sidebar.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.orm_final.controller.SideBarController">
    <children>
-      <VBox prefHeight="716.0" prefWidth="278.0" spacing="20.0" styleClass="bar" stylesheets="@../assets/CSS/sidebar.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="716.0" prefWidth="303.0" spacing="20.0" styleClass="bar" stylesheets="@../assets/CSS/sidebar.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button maxWidth="262.0" mnemonicParsing="false" onAction="#lordUserManagement" prefHeight="61.0" prefWidth="262.0" text="User  Management">
+            <Button maxWidth="333.0" mnemonicParsing="false" onAction="#lordUserManagement" prefHeight="61.0" prefWidth="333.0" text="User  Management">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button maxWidth="262.0" mnemonicParsing="false" onAction="#lordInstructorManagement" prefHeight="61.0" prefWidth="262.0" text="Instructor  Management" />
+            <Button maxWidth="292.0" mnemonicParsing="false" onAction="#lordInstructorManagement" prefHeight="61.0" prefWidth="292.0" text="Instructor  Management" />
          </children>
          <padding>
             <Insets bottom="30.0" left="10.0" right="10.0" top="30.0" />

@@ -39,6 +39,6 @@ public class SideBarController implements Initializable {
     }
 
     public void lordInstructorManagement(ActionEvent actionEvent) {
-
+        lordTempPages("Instructor_managment.fxml");
     }
 }
