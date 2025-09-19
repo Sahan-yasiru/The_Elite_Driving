@@ -8,7 +8,7 @@ import org.example.orm_final.dao.DAOFactory;
 import org.example.orm_final.dao.custom.UserDAO;
 import org.example.orm_final.dao.util.BCryptHashing;
 import org.example.orm_final.entity.user.User;
-import org.example.orm_final.model.user.DtoUser;
+import org.example.orm_final.entity.user.DtoUser;
 
 import java.io.IOException;
 import java.sql.SQLException;

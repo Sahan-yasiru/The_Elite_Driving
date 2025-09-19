@@ -1,11 +1,10 @@
 package org.example.orm_final.dao.custom.impl;
 
-import org.example.orm_final.bo.utill.converter.EtyDToConverter;
 import org.example.orm_final.dao.custom.InstructorDAO;
+import org.example.orm_final.dao.custom.LessonDAO;
 import org.example.orm_final.dao.util.FactoryConfiguration;
-import org.example.orm_final.entity.Course;
 import org.example.orm_final.entity.Instructor;
-import org.example.orm_final.entity.user.User;
+import org.example.orm_final.entity.Lesson;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -95,5 +94,34 @@ public class InstructorDAOImpl implements InstructorDAO {
     public boolean ifExit(Instructor entity) throws SQLException {
         return false;
     }
+
+//    public static void main(String[] args) throws SQLException {
+//        LessonDAO lessonDAO = new LessonDAOImpl();
+//        Instructor instructor = new Instructor("I0010", "Nimal", "nimal@gmail.com");
+//        Lesson lesson = lessonDAO.findByID("L001");
+//
+//        List<Lesson> lessonList=new ArrayList<Lesson>();
+//        lessonList.add(lesson);
+//        instructor.setLessons(lessonList);
+//        InstructorDAOImpl instructorDAO = new InstructorDAOImpl();
+//
+//        instructorDAO.save(instructor);
+//
+//    }
+//    public static void main(String[] args,String id) throws SQLException {
+//        LessonDAO lessonDAO = new LessonDAOImpl();
+////        Instructor instructor = new Instructor("I0010", "Nimal", "nimal@gmail.com");
+//        Lesson lesson = lessonDAO.findByID("L001");
+//
+//        // set both sides
+//        lesson.setInstructor(instructor);   // important
+//        List<Lesson> lessonList = new ArrayList<>();
+//        lessonList.add(lesson);
+//        instructor.setLessons(lessonList);
+//
+//        InstructorDAOImpl instructorDAO = new InstructorDAOImpl();
+//        instructorDAO.save(instructor);
+//    }
+
 
 }

@@ -4,7 +4,6 @@ import org.example.orm_final.dao.custom.UserDAO;
 import org.example.orm_final.dao.util.BCryptHashing;
 import org.example.orm_final.dao.util.FactoryConfiguration;
 import org.example.orm_final.entity.user.User;
-import org.example.orm_final.entity.user.UserType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;

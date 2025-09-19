@@ -1,17 +1,16 @@
 package org.example.orm_final.bo.utill.converter;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.example.orm_final.entity.user.DtoUser;
+import org.example.orm_final.entity.user.DtoUserType;
+import org.example.orm_final.model.DtoCourse;
 import org.example.orm_final.model.DtoInstructor;
-import org.example.orm_final.model.user.DtoUser;
-import org.example.orm_final.model.user.DtoUserType;
+import org.example.orm_final.view.CourseTM;
 import org.example.orm_final.view.instructor.InstructorTM;
 import org.example.orm_final.view.instructor.InstuctorLBL;
 import org.example.orm_final.view.user.TMUserType;
 import org.example.orm_final.view.user.UserTM;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,17 +37,29 @@ public class DtoToTMConverter {
         InstructorTM instructorTM=new InstructorTM();
         instructorTM.setId(dtoInstructor.getId());
         instructorTM.setName(dtoInstructor.getName());
-        instructorTM.setNic(dtoInstructor.getNic());
+        instructorTM.setEmail(dtoInstructor.getEmail());
         List<VBox> courses = new ArrayList<>();
-        dtoInstructor.getCourses().forEach(course -> {
-            InstuctorLBL instuctorLbl=new InstuctorLBL(course.getId());
+        if(dtoInstructor.getLessons()!=null){
+        dtoInstructor.getLessons().forEach(courseID -> {
+            InstuctorLBL instuctorLbl=new InstuctorLBL(courseID);
             VBox vBox=new VBox(instuctorLbl);
             courses.add(vBox);
         });
-        instructorTM.setCourses(courses);
+        instructorTM.setLessons(courses);
+        }
 
         return instructorTM;
     }
 
 
+    public static CourseTM getCourseTM(DtoCourse dtoCourse) {
+        CourseTM courseTM=new CourseTM();
+        courseTM.setId(dtoCourse.getId());
+        courseTM.setDescription(dtoCourse.getDescription());
+        courseTM.setFree(dtoCourse.getFree());
+        courseTM.setDuration(dtoCourse.getDuration());
+
+        return courseTM;
+
+    }
 }

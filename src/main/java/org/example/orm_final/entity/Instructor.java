@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import java.util.List;
 
@@ -24,16 +22,9 @@ public class Instructor {
     private String name;
 
     @Column(unique = true)
-    private String nic;
+    private String email;
 
-    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
-    @ManyToMany
-    @JoinTable(
-            name = "instructor_course",
-            joinColumns =  @JoinColumn(name = "instructor_ID"),
-            inverseJoinColumns = @JoinColumn(name = "course_ID")
-    )
-    private List<Course> courses;
-
+    @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL )
+    List<Lesson> lessons;
 
 }

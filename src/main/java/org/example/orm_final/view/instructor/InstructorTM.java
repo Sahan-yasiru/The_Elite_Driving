@@ -15,6 +15,6 @@ import java.util.List;
 public class InstructorTM {
     private String id;
     private String name;
-    private String nic;
-    private List<VBox> courses;
+    private String email;
+    private List<VBox> lessons;
 }

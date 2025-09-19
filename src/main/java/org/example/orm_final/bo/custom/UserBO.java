@@ -1,7 +1,7 @@
 package org.example.orm_final.bo.custom;
 
 import org.example.orm_final.bo.SuperBO;
-import org.example.orm_final.model.user.DtoUser;
+import org.example.orm_final.entity.user.DtoUser;
 
 import java.io.IOException;
 import java.sql.SQLException;

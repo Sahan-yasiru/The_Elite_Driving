@@ -26,22 +26,29 @@ public class CourseBOImpl implements CourseBO {
 
     @Override
     public boolean save(DtoCourse dtoCourse) throws SQLException {
-        return false;
+        return courseDAO.save(EtyDToConverter.getCourseEty(dtoCourse));
     }
 
     @Override
     public boolean update(DtoCourse dtoCourse) throws SQLException, IOException {
-        return false;
+        return courseDAO.update(EtyDToConverter.getCourseEty(dtoCourse));
     }
 
     @Override
     public boolean delete(DtoCourse dtoCourse) throws SQLException, IOException {
-        return false;
+        return courseDAO.delete(EtyDToConverter.getCourseEty(dtoCourse));
     }
 
     @Override
     public String getLastID() throws SQLException {
-        return "";
+        try {
+            String id=courseDAO.getLastID();
+            int intId=Integer.parseInt(id.replaceAll("\\D+", "")) + 1;
+            return String.format("C"+"%03d", intId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return "C001";
+        }
     }
 
     @Override

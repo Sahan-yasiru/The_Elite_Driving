@@ -41,4 +41,8 @@ public class SideBarController implements Initializable {
     public void lordInstructorManagement(ActionEvent actionEvent) {
         lordTempPages("Instructor_managment.fxml");
     }
+
+    public void CourseManagement(ActionEvent actionEvent) {
+        lordTempPages("course_managment.fxml");
+    }
 }

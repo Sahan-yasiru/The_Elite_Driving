@@ -4,6 +4,7 @@ import org.example.orm_final.dao.custom.CourseDAO;
 import org.example.orm_final.dao.util.FactoryConfiguration;
 import org.example.orm_final.entity.Course;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
@@ -27,22 +28,53 @@ public class CourseDAOImpl implements CourseDAO {
 
     @Override
     public boolean save(Course entity) throws SQLException {
-        return false;
+        Session session=factoryConfiguration.getSession();
+        Transaction transaction=session.beginTransaction();
+        try {
+            session.persist(entity);
+            transaction.commit();
+            return true;
+        }finally {
+            session.close();
+        }
     }
 
     @Override
     public boolean update(Course entity) throws SQLException, IOException {
-        return false;
+        Session session=factoryConfiguration.getSession();
+        Transaction transaction=session.beginTransaction();
+        try {
+            session.merge(entity);
+            transaction.commit();
+            return true;
+        }finally {
+            session.close();
+        }
     }
 
     @Override
     public boolean delete(Course entity) throws SQLException, IOException {
-        return false;
+        Session session=factoryConfiguration.getSession();
+        Transaction transaction=session.beginTransaction();
+        try {
+            session.delete(entity);
+            transaction.commit();
+            return true;
+        }finally {
+            session.close();
+        }
     }
 
     @Override
     public String getLastID() throws SQLException {
-        return "";
+        Session session=factoryConfiguration.getSession();
+        try {
+            Query<Course>  courseQuery=session.createQuery("FROM course ORDER BY id DESC").setMaxResults(1);
+            Course course=courseQuery.getSingleResult();
+            return course.getId();
+        }finally {
+            session.close();
+        }
     }
 
     @Override

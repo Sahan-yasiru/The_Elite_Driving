@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.orm_final.entity.Lesson;
 
 import java.util.List;
 
@@ -12,16 +11,21 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
-public class DtoCourse {
+public class DtoStudent {
 
     private String id;
 
-    private String duration;
+    private String name;
 
-    private double free;
+    private String email;
 
-    private String description;
+    private int phoneNumber;
+
+    private List<String>  payments;
+
+    private List<String> courses;
 
     private List<String> lessons;
+
 
 }

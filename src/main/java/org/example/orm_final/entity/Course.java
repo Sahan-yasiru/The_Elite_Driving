@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import java.util.List;
 
@@ -18,6 +16,7 @@ import java.util.List;
 public class Course {
 
     @Id
+    @Column(name = "course_ID")
     private String id;
 
     private String duration;
@@ -25,5 +24,8 @@ public class Course {
     private double free;
 
     private String description;
+
+    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
+    List<Lesson> lessons;
 
 }

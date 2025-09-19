@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.orm_final.bo.BOFactory;
 import org.example.orm_final.bo.custom.UserBO;
-import org.example.orm_final.model.user.DtoUser;
+import org.example.orm_final.entity.user.DtoUser;
 
 import java.io.IOException;
 import java.sql.SQLException;

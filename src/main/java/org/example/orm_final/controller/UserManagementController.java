@@ -8,8 +8,8 @@ import javafx.scene.input.MouseEvent;
 import org.example.orm_final.bo.BOFactory;
 import org.example.orm_final.bo.utill.converter.DtoToTMConverter;
 import org.example.orm_final.bo.custom.UserBO;
-import org.example.orm_final.model.user.DtoUser;
-import org.example.orm_final.model.user.DtoUserType;
+import org.example.orm_final.entity.user.DtoUser;
+import org.example.orm_final.entity.user.DtoUserType;
 import org.example.orm_final.view.user.TMUserType;
 import org.example.orm_final.view.user.UserTM;
 

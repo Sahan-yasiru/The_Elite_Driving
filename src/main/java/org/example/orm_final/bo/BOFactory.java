@@ -2,6 +2,7 @@ package org.example.orm_final.bo;
 
 import org.example.orm_final.bo.custom.impl.CourseBOImpl;
 import org.example.orm_final.bo.custom.impl.InstructorBOImpl;
+import org.example.orm_final.bo.custom.impl.LessonBOImpl;
 import org.example.orm_final.bo.custom.impl.UserBOImpl;
 
 public class BOFactory {
@@ -16,7 +17,8 @@ public class BOFactory {
     public enum  BOTypes{
         User,
         Instructor,
-        Course
+        Course,
+        Lesson
     }
     public SuperBO getBO(BOTypes boType){
         switch (boType){
@@ -28,6 +30,9 @@ public class BOFactory {
             }
             case Course -> {
                 return new CourseBOImpl();
+            }
+            case Lesson -> {
+                return new LessonBOImpl();
             }
             default -> {
                 return null;
