@@ -5,6 +5,10 @@ import org.example.orm_final.dao.custom.LessonDAO;
 import org.example.orm_final.dao.util.FactoryConfiguration;
 import org.example.orm_final.entity.Instructor;
 import org.example.orm_final.entity.Lesson;
+import org.example.orm_final.model.DtoCourse;
+import org.example.orm_final.model.DtoInstructor;
+import org.example.orm_final.model.DtoLesson;
+import org.example.orm_final.model.DtoStudent;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -100,15 +104,35 @@ public class LessonDAOImpl implements LessonDAO {
         return false;
     }
 
-    public static void main(String[] args) throws SQLException {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        {
-            Transaction transaction = session.beginTransaction();
-            try {
-                System.out.println(new LessonDAOImpl().getLastID());
-            } finally {
-                session.close();
-            }
+
+    public static void main(String[] args) {
+        DtoLesson dtoLesson = new DtoLesson();
+        dtoLesson.setLessonId("L004");
+        dtoLesson.setLessonName("pccc");
+        dtoLesson.setTime("pcc");
+        dtoLesson.setDate(LocalDate.now());
+
+        DtoInstructor instructor = new DtoInstructor();
+        instructor.setId("I001");
+        dtoLesson.setInstructor(instructor);
+
+        DtoCourse dtoCourse= new DtoCourse();
+        dtoCourse.setId("C001");
+        dtoLesson.setCourse(dtoCourse);
+
+        DtoStudent dtoStudent = new DtoStudent();
+        dtoStudent.setId("S001");
+        dtoLesson.setStudent(dtoStudent);
+        Session session=FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+
+        try {
+            session.persist(EtyDToConverter.getLessonEty(dtoLesson));
+            transaction.commit();
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 

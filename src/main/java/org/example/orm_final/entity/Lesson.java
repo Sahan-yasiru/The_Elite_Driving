@@ -37,7 +37,4 @@ public class Lesson {
     @JoinColumn(name = "stu_ID")
     private Student student;
 
-
-
-
 }

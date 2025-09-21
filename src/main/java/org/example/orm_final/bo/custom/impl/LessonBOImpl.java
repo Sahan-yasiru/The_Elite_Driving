@@ -26,17 +26,17 @@ public class LessonBOImpl implements LessonBO {
 
     @Override
     public boolean save(DtoLesson dtoLesson) throws SQLException {
-        return false;
+        return lessonDAO.save(EtyDToConverter.getLessonEty(dtoLesson));
     }
 
     @Override
     public boolean update(DtoLesson dtoLesson) throws SQLException, IOException {
-        return false;
+        return lessonDAO.update(EtyDToConverter.getLessonEty(dtoLesson));
     }
 
     @Override
     public boolean delete(DtoLesson dtoLesson) throws SQLException, IOException {
-        return false;
+        return lessonDAO.delete(EtyDToConverter.getLessonEty(dtoLesson));
     }
 
     @Override

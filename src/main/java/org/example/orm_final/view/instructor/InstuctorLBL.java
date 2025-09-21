@@ -9,11 +9,11 @@ import static javafx.geometry.Pos.CENTER;
 
 public class InstuctorLBL extends Label  {
 
-    public InstuctorLBL(String text){
+    public InstuctorLBL(String text) {
         super(text);
         setAlignment(CENTER);
-        setStyle(this.getStyle()+"-fx-font-size: 20px;"+"-fx-background-color: #6e00ff;"+"-fx-border-radius: 10px;"+
-                "-fx-background-radius: 10px;"+"-fx-text-fill: white;");
+        setStyle(this.getStyle() + "-fx-font-size: 20px;" + "-fx-background-color: #6e00ff;" + "-fx-border-radius: 10px;" +
+                "-fx-background-radius: 10px;" + "-fx-text-fill: white;");
     }
 
 }

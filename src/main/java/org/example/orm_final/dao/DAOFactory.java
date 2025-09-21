@@ -1,9 +1,6 @@
 package org.example.orm_final.dao;
 
-import org.example.orm_final.dao.custom.impl.CourseDAOImpl;
-import org.example.orm_final.dao.custom.impl.InstructorDAOImpl;
-import org.example.orm_final.dao.custom.impl.LessonDAOImpl;
-import org.example.orm_final.dao.custom.impl.UserDAOImpl;
+import org.example.orm_final.dao.custom.impl.*;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -18,6 +15,7 @@ public class DAOFactory {
         Instructor,
         Course,
         Lesson,
+        Student
     }
     public SuperDAO getDAO(DAOTypes daoType){
         switch (daoType){
@@ -32,6 +30,9 @@ public class DAOFactory {
             }
             case Lesson -> {
                 return new LessonDAOImpl();
+            }
+            case Student -> {
+                return new StudentDAOImpl();
             }
 
             default -> {

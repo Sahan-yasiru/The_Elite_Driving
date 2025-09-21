@@ -187,22 +187,32 @@ public class EtyDToConverter {
         return  course;
     }
 
-//    public static Lesson getLessonEty(Lesson lesson) {
-//        DtoLesson dtoLesson = new DtoLesson();
-//
-//        dtoLesson.setLessonId(lesson.getLessonId());
-//        dtoLesson.setLessonName(lesson.getLessonName());
-//        dtoLesson.setTime(lesson.getTime());
-//        dtoLesson.setDate(lesson.getDate());
-//        if(lesson.getInstructor()!=null) {
-//            dtoLesson.setInstructor(getInstructorDto(lesson.getInstructor()));
-//        }
-//        if(lesson.getCourse()!=null) {
-//            dtoLesson.setCourse(getCourseDto(lesson.getCourse()));
-//        }
-//        if(lesson.getStudent()!=null) {
-//            dtoLesson.setStudent(getStudentDto(lesson.getStudent()));
-//        }
-//        return dtoLesson;
-//    }
+
+
+    public static Lesson getLessonEty(DtoLesson dtoLesson) {
+        Lesson lesson = new Lesson();
+
+        lesson.setLessonId(dtoLesson.getLessonId());
+        lesson.setLessonName(dtoLesson.getLessonName());
+        lesson.setTime(dtoLesson.getTime());
+        lesson.setDate(dtoLesson.getDate());
+        if(dtoLesson.getInstructor()!=null) {
+            lesson.setInstructor(getInstructorEty(dtoLesson.getInstructor()));
+        }
+        if(dtoLesson.getCourse()!=null) {
+            lesson.setCourse(getCourseEty(dtoLesson.getCourse()));
+        }
+        if(dtoLesson.getStudent()!=null) {
+            lesson.setStudent(getStudentETY(dtoLesson.getStudent()));
+        }
+        return lesson;
+    }
+
+    private static Student getStudentETY(DtoStudent dtoStudent) {
+        Student student=new Student();
+        student.setId(dtoStudent.getId());
+        student.setName(dtoStudent.getName());
+        student.setEmail(dtoStudent.getEmail());
+        return student;
+    }
 }

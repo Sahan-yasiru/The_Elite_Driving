@@ -5,7 +5,9 @@ import org.example.orm_final.entity.user.DtoUser;
 import org.example.orm_final.entity.user.DtoUserType;
 import org.example.orm_final.model.DtoCourse;
 import org.example.orm_final.model.DtoInstructor;
+import org.example.orm_final.model.DtoLesson;
 import org.example.orm_final.view.CourseTM;
+import org.example.orm_final.view.LessonTM;
 import org.example.orm_final.view.instructor.InstructorTM;
 import org.example.orm_final.view.instructor.InstuctorLBL;
 import org.example.orm_final.view.user.TMUserType;
@@ -60,6 +62,21 @@ public class DtoToTMConverter {
         courseTM.setDuration(dtoCourse.getDuration());
 
         return courseTM;
+
+    }
+
+    public static LessonTM getLessonTM(DtoLesson dtoLesson) {
+        LessonTM lessonTM=new LessonTM();
+        lessonTM.setLessonId(dtoLesson.getLessonId());
+        lessonTM.setLessonName(dtoLesson.getLessonName());
+        lessonTM.setTime(dtoLesson.getTime());
+        lessonTM.setDate(dtoLesson.getDate());
+
+        lessonTM.setCourseID(new InstuctorLBL(dtoLesson.getCourse().getId()));
+        lessonTM.setInstructorID(new InstuctorLBL(dtoLesson.getInstructor().getId()));
+        lessonTM.setStudentID(new InstuctorLBL(dtoLesson.getStudent().getId()));
+
+        return lessonTM;
 
     }
 }
