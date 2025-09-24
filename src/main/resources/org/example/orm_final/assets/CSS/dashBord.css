@@ -1,0 +1,25 @@
+.lbBox{
+    -fx-background-color: #0dd50f;
+    -fx-border-color: white;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-width: 7px;
+    -fx-alignment: center;
+
+
+}
+.lbl{
+    -fx-font-size: 70px;
+    -fx-font-weight: bold;
+
+}
+.lbl2{
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-border-color: white;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-alignment: center;
+    -fx-border-width: 5px;
+
+}

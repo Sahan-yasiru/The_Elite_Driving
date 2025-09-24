@@ -34,7 +34,7 @@ public class LoginController{
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/orm_final/FXML/SideBar.fxml"));
                     Stage stage = new Stage();
                     stage.setScene(new Scene(fxmlLoader.load()));
-                    stage.setMinWidth(1252.00);
+                    stage.setMinWidth(1500.00);
                     stage.setMinHeight(716.00);
                     stage.setResizable(true);
                     stage.show();

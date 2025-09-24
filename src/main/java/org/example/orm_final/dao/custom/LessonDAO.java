@@ -7,4 +7,5 @@ import java.sql.SQLException;
 
 public interface LessonDAO extends CrudDAO<Lesson> {
     Lesson findByID(String id) throws SQLException;
+    String getNumOF() throws SQLException;
 }

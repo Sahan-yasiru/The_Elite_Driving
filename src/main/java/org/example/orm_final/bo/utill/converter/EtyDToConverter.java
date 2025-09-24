@@ -215,4 +215,22 @@ public class EtyDToConverter {
         student.setEmail(dtoStudent.getEmail());
         return student;
     }
+
+    public static Student getStudentEty(DtoStudent dtoStudent) {
+        Student student = new Student();
+        student.setId(dtoStudent.getId());
+        student.setName(dtoStudent.getName());
+        student.setEmail(dtoStudent.getEmail());
+        student.setPhoneNumber(dtoStudent.getPhoneNumber());
+
+        if(dtoStudent.getCourses()!=null) {
+            List<Course> courses = new ArrayList<>();
+            dtoStudent.getCourses().forEach(id -> {
+                Course course = new Course();
+                course.setId(id);
+            });
+            student.setCourses(courses);
+        }
+        return student;
+    }
 }

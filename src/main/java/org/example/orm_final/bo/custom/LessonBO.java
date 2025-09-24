@@ -15,5 +15,7 @@ public interface LessonBO extends SuperBO {
     public boolean delete(DtoLesson dtoLesson)throws SQLException, IOException;
     public String getLastID()throws SQLException;
     public boolean ifExit(DtoLesson dtoLesson) throws SQLException;
+    String getNumOF() throws SQLException;
+
 
 }

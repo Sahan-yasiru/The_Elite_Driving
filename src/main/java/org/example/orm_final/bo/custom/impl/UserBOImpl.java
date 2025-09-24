@@ -1,6 +1,7 @@
 package org.example.orm_final.bo.custom.impl;
 
 import jakarta.persistence.PersistenceException;
+import lombok.Getter;
 import org.example.orm_final.bo.utill.converter.EtyDToConverter;
 import org.example.orm_final.bo.custom.UserBO;
 import org.example.orm_final.bo.exception.DuplicateID;
@@ -9,6 +10,7 @@ import org.example.orm_final.dao.custom.UserDAO;
 import org.example.orm_final.dao.util.BCryptHashing;
 import org.example.orm_final.entity.user.User;
 import org.example.orm_final.entity.user.DtoUser;
+import org.example.orm_final.entity.user.UserType;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,16 +20,25 @@ import java.util.NoSuchElementException;
 
 public class UserBOImpl implements UserBO {
 
-    UserDAO userDAO = (UserDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.User);
+    private UserDAO userDAO = (UserDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.User);
+    @Getter
+    private static String userType;
 
 
     @Override
     public boolean ifExit(DtoUser dtoUser) {
         try {
-            User user=new User();
+            User user = new User();
             user.setUserName(dtoUser.getUserName());
             user.setPassWold(dtoUser.getPassWold());
-            return userDAO.ifExit(user);
+
+            User user1 = userDAO.ifExitSP(user);
+            if (user1 != null) {
+                userType = user1.getUserType().equals(UserType.Admin)?"Admin":"Receptionist";
+                System.out.println(userType);
+                return true;
+            }
+            return false;
         } catch (NoSuchElementException e) {
             return false;
         } catch (Exception e) {
@@ -50,9 +61,9 @@ public class UserBOImpl implements UserBO {
         dtoUser.setPassWold(BCryptHashing.getHashedPassword(dtoUser.getPassWold()));
         try {
             boolean b = userDAO.ifExit(EtyDToConverter.getUserEty(dtoUser));
-            if (b){
+            if (b) {
                 throw new DuplicateID("user already exits");
-            }else{
+            } else {
                 return userDAO.save(EtyDToConverter.getUserEty(dtoUser));
             }
         } catch (PersistenceException | SQLException e) {
@@ -67,8 +78,8 @@ public class UserBOImpl implements UserBO {
 //            if (b){
 //                throw new DuplicateID("user already exits");
 //            }else{
-                dtoUser.setPassWold(BCryptHashing.getHashedPassword(dtoUser.getPassWold()));
-                return userDAO.update(EtyDToConverter.getUserEty(dtoUser));
+            dtoUser.setPassWold(BCryptHashing.getHashedPassword(dtoUser.getPassWold()));
+            return userDAO.update(EtyDToConverter.getUserEty(dtoUser));
 //            }
         } catch (PersistenceException | SQLException e) {
             throw new DuplicateID("user already exits");
@@ -89,5 +100,13 @@ public class UserBOImpl implements UserBO {
             e.printStackTrace();
             return 1 + "";
         }
+    }
+
+    public static void main(String[] args) {
+        UserBOImpl userBO = new UserBOImpl();
+        DtoUser dtoUser = new DtoUser();
+        dtoUser.setPassWold("123");
+        dtoUser.setUserName("123");
+        System.out.println(userBO.ifExit(dtoUser));
     }
 }

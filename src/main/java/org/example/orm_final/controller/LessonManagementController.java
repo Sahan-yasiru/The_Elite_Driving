@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import org.example.orm_final.bo.BOFactory;
 import org.example.orm_final.bo.custom.CourseBO;
@@ -13,19 +12,17 @@ import org.example.orm_final.bo.custom.InstructorBO;
 import org.example.orm_final.bo.custom.LessonBO;
 import org.example.orm_final.bo.custom.StudentBO;
 import org.example.orm_final.bo.utill.converter.DtoToTMConverter;
-import org.example.orm_final.entity.Instructor;
 import org.example.orm_final.model.DtoCourse;
 import org.example.orm_final.model.DtoInstructor;
 import org.example.orm_final.model.DtoLesson;
 import org.example.orm_final.model.DtoStudent;
 import org.example.orm_final.view.LessonTM;
-import org.example.orm_final.view.instructor.InstuctorLBL;
+import org.example.orm_final.view.label.TMLBL;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class LessonManagementController implements Initializable {
@@ -36,7 +33,7 @@ public class LessonManagementController implements Initializable {
     @FXML
     private TableColumn colID, colDate, colName, colTime;
     @FXML
-    private TableColumn<LessonTM, InstuctorLBL> colCourID, colInsID, colStuID;
+    private TableColumn<LessonTM, TMLBL> colCourID, colInsID, colStuID;
     @FXML
     private TableView<LessonTM> tableView;
     @FXML
@@ -44,7 +41,7 @@ public class LessonManagementController implements Initializable {
     @FXML
     private Label lblID;
     @FXML
-    private Button btnSave, btnUpdate, btnDelete;
+    private Button btnSave, btnUpdate, btnDelete,btnRest;
     private LessonBO lessonBO = (LessonBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.Lesson);
     private CourseBO courseBO = (CourseBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.Course);
     private InstructorBO instructorBO = (InstructorBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.Instructor);
@@ -60,9 +57,9 @@ public class LessonManagementController implements Initializable {
         }
         lordCMBS();
         colCourID.setCellValueFactory(new PropertyValueFactory<>("courseID"));
-        colCourID.setCellFactory(col -> new TableCell<LessonTM, InstuctorLBL>() {
+        colCourID.setCellFactory(col -> new TableCell<LessonTM, TMLBL>() {
             @Override
-            protected void updateItem(InstuctorLBL lbl, boolean empty) {
+            protected void updateItem(TMLBL lbl, boolean empty) {
                 super.updateItem(lbl, empty);
                 if (empty || lbl.getText().isEmpty()) {
                     setGraphic(null);
@@ -73,9 +70,9 @@ public class LessonManagementController implements Initializable {
         });
 
         colInsID.setCellValueFactory(new PropertyValueFactory<>("instructorID"));
-        colInsID.setCellFactory(col -> new TableCell<LessonTM, InstuctorLBL>() {
+        colInsID.setCellFactory(col -> new TableCell<LessonTM, TMLBL>() {
             @Override
-            protected void updateItem(InstuctorLBL lbl, boolean empty) {
+            protected void updateItem(TMLBL lbl, boolean empty) {
                 super.updateItem(lbl, empty);
                 if (empty || lbl.getText().isEmpty()) {
                     setGraphic(null);
@@ -87,9 +84,9 @@ public class LessonManagementController implements Initializable {
 
 
         colStuID.setCellValueFactory(new PropertyValueFactory<>("studentID"));
-        colStuID.setCellFactory(col -> new TableCell<LessonTM, InstuctorLBL>() {
+        colStuID.setCellFactory(col -> new TableCell<LessonTM, TMLBL>() {
             @Override
-            protected void updateItem(InstuctorLBL lbl, boolean empty) {
+            protected void updateItem(TMLBL lbl, boolean empty) {
                 super.updateItem(lbl, empty);
                 if (empty ||lbl.getText().isEmpty()) {
                     setGraphic(null);
@@ -109,6 +106,9 @@ public class LessonManagementController implements Initializable {
         });
         btnDelete.setOnAction(event -> {
             delete();
+        });
+        btnRest.setOnAction(event -> {
+            reLode();
         });
         lordTable();
         btnDelete.setDisable(true);
@@ -361,7 +361,7 @@ public class LessonManagementController implements Initializable {
 
 
     public void spaceclicked(MouseEvent event) {
-        reLode();
+//        reLode();
     }
 
 }

@@ -15,6 +15,7 @@ import org.example.orm_final.bo.utill.converter.DtoToTMConverter;
 import org.example.orm_final.model.DtoInstructor;
 import org.example.orm_final.model.DtoLesson;
 import org.example.orm_final.view.instructor.InstructorTM;
+import org.example.orm_final.view.label.TMLBL;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ public class InstructorManagementController implements Initializable {
     @FXML
     private TableColumn colID, colName, colEmail;
     @FXML
-    private TableColumn<InstructorTM, List<VBox>> collessons;
+    private TableColumn<InstructorTM, List<TMLBL>> collessons;
     @FXML
     private TableView<InstructorTM> tableView;
     @FXML
@@ -34,7 +35,7 @@ public class InstructorManagementController implements Initializable {
     @FXML
     private Label lblID;
     @FXML
-    private Button btnSave, btnUpdate, btnDelete;
+    private Button btnSave, btnUpdate, btnDelete,btnRest;
     private InstructorBO instructorBO = (InstructorBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.Instructor);
     private LessonBO lessonBO = (LessonBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.Lesson);
     private String id;
@@ -47,17 +48,19 @@ public class InstructorManagementController implements Initializable {
             controls[i].setCellValueFactory(new PropertyValueFactory<>(colNames[i]));
         }
         collessons.setCellValueFactory(new PropertyValueFactory<>("lessons"));
-        collessons.setCellFactory(col -> new TableCell<InstructorTM, List<VBox>>() {
-            private final HBox hbox = new HBox(5); // use HBox if you want VBox items in a row
+        collessons.setCellFactory(col -> new TableCell<InstructorTM, List<TMLBL>>() {
+            private final VBox vBox = new VBox(5); // use HBox if you want VBox items in a row
 
             @Override
-            protected void updateItem(List<VBox> vboxes, boolean empty) {
-                super.updateItem(vboxes, empty);
-                if (empty || vboxes == null || vboxes.isEmpty()) {
+            protected void updateItem(List<TMLBL> list, boolean empty) {
+                super.updateItem(list, empty);
+                if (empty ||  list.isEmpty()) {
                     setGraphic(null);
                 } else {
-                    hbox.getChildren().setAll(vboxes); // clear and add all VBoxes
-                    setGraphic(hbox);
+                    list.forEach(lblID->{
+                        vBox.getChildren().add(lblID);
+                    }); // clear and add all VBoxes
+                    setGraphic(vBox);
                 }
             }
         });
@@ -81,6 +84,9 @@ public class InstructorManagementController implements Initializable {
         });
         btnDelete.setOnAction(event -> {
             delete();
+        });
+        btnRest.setOnAction(event -> {
+            reLode();
         });
         lordTable();
         btnDelete.setDisable(true);
@@ -202,7 +208,7 @@ public class InstructorManagementController implements Initializable {
     }
 
     public void paneclicked(MouseEvent event) {
-        System.out.println("pane");
-        reLode();
+//        System.out.println("pane");
+//        reLode();
     }
 }

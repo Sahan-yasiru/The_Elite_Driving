@@ -23,6 +23,10 @@ public class InstructorBOImpl implements InstructorBO {
     private InstructorDAO instructorDAO= (InstructorDAOImpl)DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.Instructor);
     private LessonDAO lessonDAO=(LessonDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.Lesson);
 
+    @Override
+    public String getNumOF() throws SQLException {
+        return instructorDAO.getNumOF();
+    }
 
     @Override
     public List<DtoInstructor> getAll() throws SQLException {

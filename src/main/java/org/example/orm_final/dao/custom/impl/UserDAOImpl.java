@@ -14,8 +14,19 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
-    private FactoryConfiguration factoryConfiguration=FactoryConfiguration.getInstance();
+    private FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
 
+
+    @Override
+    public User getType(int id) throws SQLException {
+        Session session = factoryConfiguration.getSession();
+        try {
+            User user = session.get(User.class, id);
+            return user;
+        } finally {
+            session.close();
+        }
+    }
 
     @Override
     public boolean ifExit(User user) throws SQLException {
@@ -24,49 +35,55 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("userName", user.getUserName());
         try {
             Long l = (Long) query.uniqueResult();
-            if (l>0) {
+            if (l > 0) {
                 return true;
             } else {
                 return false;
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             session.close();
         }
     }
 
     @Override
-    public boolean ifExitSP(User user) throws SQLException {
-        Session session = factoryConfiguration.getSession();
-        Query<User> query = session.createQuery("FROM user  WHERE userName =: userName", User.class);
-        query.setParameter("userName", user.getUserName());
+    public User ifExitSP(User user) throws SQLException {
+        Session session = null;
+        Query<User> query = null;
+        try {
+            session = factoryConfiguration.getSession();
+            query = session.createQuery("FROM user  WHERE userName =: userName", User.class);
+            query.setParameter("userName", user.getUserName());
 
-        List<User> user1 = query.list();
-        System.out.println(user1.getFirst().getUserType());
-
-        boolean b=BCryptHashing.chackHashedPassword(user.getPassWold(),user1.getFirst().getPassWold());
-        session.close();
-        return b;
-
+            User u = query.getSingleResultOrNull();
+            if (u != null) {
+                boolean b = BCryptHashing.chackHashedPassword(user.getPassWold(), u.getPassWold());
+                return b?u:null;
+            }else {
+                return null;
+            }
+        } finally {
+            session.close();
+        }
     }
 
     @Override
     public List<User> getAll() throws SQLException {
-        Session session=factoryConfiguration.getSession();
+        Session session = factoryConfiguration.getSession();
         try {
-            Query<User> userQuery=session.createQuery("FROM user", User.class);
-            List<User> userList=userQuery.list();
+            Query<User> userQuery = session.createQuery("FROM user", User.class);
+            List<User> userList = userQuery.list();
             return userList;
-        }finally {
+        } finally {
             session.close();
         }
     }
 
     @Override
     public boolean save(User entity) throws SQLException {
-        Session session= FactoryConfiguration.getInstance().getSession();
-        Transaction transaction=session.beginTransaction();
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
         try {
             session.persist(entity);
             System.out.println("works");
@@ -76,38 +93,38 @@ public class UserDAOImpl implements UserDAO {
             e.printStackTrace();
             transaction.rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }
 
     @Override
     public boolean update(User entity) throws SQLException {
-        Session session=factoryConfiguration.getSession();
-        Transaction transaction=session.beginTransaction();
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
         try {
             session.merge(entity);
             transaction.commit();
             return true;
         } catch (Exception e) {
-            if(transaction!=null) transaction.rollback();
+            if (transaction != null) transaction.rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }
 
     @Override
     public boolean delete(User entity) throws SQLException {
-        Session session=factoryConfiguration.getSession();
-        Transaction transaction=session.beginTransaction();
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
         try {
             session.remove(entity);
             transaction.commit();
             return true;
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             session.close();
         }
     }
@@ -115,15 +132,21 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public String getLastID() throws SQLException {
 
-       Session session=factoryConfiguration.getSession();
-       try {
-           Query<Integer> query = session.createQuery("SELECT id FROM user ORDER BY id DESC LIMIT 1", Integer.class);
-           int id = query.getSingleResult();
-           session.close();
-           return id + "";
-       }finally {
-           session.close();
-       }
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<Integer> query = session.createQuery("SELECT id FROM user ORDER BY id DESC LIMIT 1", Integer.class);
+            int id = query.getSingleResult();
+            session.close();
+            return id + "";
+        } finally {
+            session.close();
+        }
+    }
+
+    public static void main(String[] args) throws SQLException {
+        UserDAOImpl userDAO = new UserDAOImpl();
+        User user = userDAO.getType(1);
+        System.out.println(user.getUserType());
     }
 
 

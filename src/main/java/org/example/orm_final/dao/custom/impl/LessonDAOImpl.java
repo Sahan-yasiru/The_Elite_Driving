@@ -23,6 +23,17 @@ public class LessonDAOImpl implements LessonDAO {
     FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
 
     @Override
+    public String getNumOF() throws SQLException {
+        Session session=factoryConfiguration.getSession();
+        try {
+            Query query=session.createQuery(" SELECT count(*) FROM Lesson c");
+            return query.uniqueResult()==null?"0":query.uniqueResult()+"";
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
     public Lesson findByID(String id) throws SQLException {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();

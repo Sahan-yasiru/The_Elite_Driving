@@ -1,6 +1,7 @@
 package org.example.orm_final.bo.custom;
 
 import org.example.orm_final.bo.SuperBO;
+import org.example.orm_final.entity.Course;
 import org.example.orm_final.model.DtoCourse;
 
 import java.io.IOException;
@@ -14,5 +15,7 @@ public interface CourseBO extends SuperBO {
     public boolean delete(DtoCourse dtoCourse)throws SQLException, IOException;
     public String getLastID()throws SQLException;
     public boolean ifExit(DtoCourse dtoCourse) throws SQLException;
+    String getNumOF() throws SQLException;
+
 
 }

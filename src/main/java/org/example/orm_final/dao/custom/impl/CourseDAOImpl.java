@@ -14,6 +14,29 @@ import java.util.List;
 public class CourseDAOImpl implements CourseDAO {
 
     private FactoryConfiguration factoryConfiguration=FactoryConfiguration.getInstance();
+
+    @Override
+    public String getNumOF() throws SQLException {
+        Session session=factoryConfiguration.getSession();
+        try {
+            Query query=session.createQuery(" SELECT count(*) FROM course c");
+            return query.uniqueResult()==null?"0":query.uniqueResult()+"";
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public Course getCourseById(String id) throws SQLException {
+        Session session=factoryConfiguration.getSession();
+        try {
+            Course course=session.get(Course.class,id);
+            return course;
+        }finally {
+            session.close();
+        }
+    }
+
     @Override
     public List<Course> getAll() throws SQLException {
         Session session=factoryConfiguration.getSession();

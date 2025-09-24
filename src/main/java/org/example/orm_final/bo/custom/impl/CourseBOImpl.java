@@ -15,6 +15,12 @@ import java.util.List;
 public class CourseBOImpl implements CourseBO {
 
     CourseDAO courseDAO=(CourseDAOImpl) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.Course);
+
+    @Override
+    public String getNumOF() throws SQLException {
+        return courseDAO.getNumOF();
+    }
+
     @Override
     public List<DtoCourse> getAll() throws SQLException{
         List<DtoCourse> dtoCourses=new ArrayList<>();

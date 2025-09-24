@@ -26,7 +26,7 @@ public class CourseManagementController implements Initializable {
     @FXML
     private Label lblID;
     @FXML
-    private Button btnSave, btnUpdate, btnDelete;
+    private Button btnSave, btnUpdate, btnDelete,btnRest;
     private CourseBO courseBO = (CourseBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.Course);
     private String id;
 
@@ -56,6 +56,9 @@ public class CourseManagementController implements Initializable {
         });
         btnDelete.setOnAction(event -> {
             delete();
+        });
+        btnRest.setOnAction(event -> {
+            reLode();
         });
         lordTable();
         btnDelete.setDisable(true);
@@ -198,6 +201,6 @@ public class CourseManagementController implements Initializable {
 
 
     public void spaceclicked(MouseEvent event) {
-        reLode();
+//        reLode();
     }
 }

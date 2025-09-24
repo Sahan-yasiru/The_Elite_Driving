@@ -6,10 +6,12 @@ import org.example.orm_final.entity.user.DtoUserType;
 import org.example.orm_final.model.DtoCourse;
 import org.example.orm_final.model.DtoInstructor;
 import org.example.orm_final.model.DtoLesson;
+import org.example.orm_final.model.DtoStudent;
 import org.example.orm_final.view.CourseTM;
 import org.example.orm_final.view.LessonTM;
+import org.example.orm_final.view.StudentTM;
 import org.example.orm_final.view.instructor.InstructorTM;
-import org.example.orm_final.view.instructor.InstuctorLBL;
+import org.example.orm_final.view.label.TMLBL;
 import org.example.orm_final.view.user.TMUserType;
 import org.example.orm_final.view.user.UserTM;
 
@@ -40,12 +42,11 @@ public class DtoToTMConverter {
         instructorTM.setId(dtoInstructor.getId());
         instructorTM.setName(dtoInstructor.getName());
         instructorTM.setEmail(dtoInstructor.getEmail());
-        List<VBox> courses = new ArrayList<>();
+        List<TMLBL> courses = new ArrayList<>();
         if(dtoInstructor.getLessons()!=null){
         dtoInstructor.getLessons().forEach(courseID -> {
-            InstuctorLBL instuctorLbl=new InstuctorLBL(courseID);
-            VBox vBox=new VBox(instuctorLbl);
-            courses.add(vBox);
+            TMLBL instuctorLbl=new TMLBL(courseID);
+            courses.add(instuctorLbl);
         });
         instructorTM.setLessons(courses);
         }
@@ -72,11 +73,29 @@ public class DtoToTMConverter {
         lessonTM.setTime(dtoLesson.getTime());
         lessonTM.setDate(dtoLesson.getDate());
 
-        lessonTM.setCourseID(new InstuctorLBL(dtoLesson.getCourse().getId()));
-        lessonTM.setInstructorID(new InstuctorLBL(dtoLesson.getInstructor().getId()));
-        lessonTM.setStudentID(new InstuctorLBL(dtoLesson.getStudent().getId()));
+        lessonTM.setCourseID(new TMLBL(dtoLesson.getCourse().getId()));
+        lessonTM.setInstructorID(new TMLBL(dtoLesson.getInstructor().getId()));
+        lessonTM.setStudentID(new TMLBL(dtoLesson.getStudent().getId()));
 
         return lessonTM;
+
+    }
+
+    public static StudentTM getStudentTM(DtoStudent dtoStudent) {
+        StudentTM studentTM=new StudentTM();
+        studentTM.setId(dtoStudent.getId());
+        studentTM.setName(dtoStudent.getName());
+        studentTM.setEmail(dtoStudent.getEmail());
+        studentTM.setPhoneNumber(dtoStudent.getPhoneNumber());
+
+        List<TMLBL> courses = new ArrayList<>();
+        dtoStudent.getCourses().forEach(courseID -> {
+            courses.add(new TMLBL(courseID));
+        });
+        studentTM.setCourses(courses);
+
+        return studentTM;
+
 
     }
 }

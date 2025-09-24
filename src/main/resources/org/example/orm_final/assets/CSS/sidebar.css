@@ -1,23 +1,30 @@
 .background{
-    -fx-background-color: #FFFFF0;
-}
-.bar{
-    -fx-background-color: #1c5e5e;
-    -fx-background-radius: 0px 20px 20px 0px ;
-    /*-fx-border-color: #000000;*/
-    /*-fx-border-style: ;*/
-    -fx-border-width: 7px 7px 7px 0px;
-    -fx-border-radius: 0px 10px 10px 0px ;
-
+    -fx-background-color: #222831;
 }
 .button{
     -fx-background-color: black;
     -fx-text-fill: white;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-background-radius: 20px;
+    -fx-background-radius: 25px;
     -fx-border-radius: 20px;
-    -fx-border-color: white;
+    -fx-border-color: #9168e1;
     -fx-border-width: 5px;
-
+}
+.button:hover{
+    -fx-background-color: #FEB21A;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+}
+.button:pressed{
+    -fx-background-color: #f40404;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+}
+.buttonBar{
+    -fx-background-radius: 30px;
+    -fx-border-radius: 20px;
+    -fx-border-color: #9168e1;
+    -fx-border-width: 5px;
+    -fx-background-color: #FEB21A;
 }

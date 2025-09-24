@@ -15,4 +15,6 @@ public interface StudentBO extends SuperBO {
     public boolean delete(DtoStudent dtoStudent)throws SQLException, IOException;
     public String getLastID()throws SQLException;
     public boolean ifExit(DtoStudent dtoStudent) throws SQLException;
+    String getNumOF() throws SQLException;
+
 }

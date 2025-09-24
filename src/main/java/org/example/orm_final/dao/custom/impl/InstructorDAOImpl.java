@@ -18,6 +18,17 @@ public class InstructorDAOImpl implements InstructorDAO {
     private FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
 
     @Override
+    public String getNumOF() throws SQLException {
+        Session session=factoryConfiguration.getSession();
+        try {
+            Query query=session.createQuery(" SELECT count(*) FROM instructor c");
+            return query.uniqueResult()==null?"0":query.uniqueResult()+"";
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
     public List<Instructor> getAll() throws SQLException {
         Session session = factoryConfiguration.getSession();
         try {

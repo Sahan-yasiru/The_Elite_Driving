@@ -1,23 +1,26 @@
-.backgraund{
-    -fx-background-color: #DEE791;
-    -fx-border-color: #78C841;
-    -fx-border-radius: 20px;
-    -fx-border-width: 5px;
-    -fx-background-radius: 20px;
+.backgraund {
+    -fx-background-color: #393E46;
+    /*-fx-border-color: #f6d700;*/
+    /*-fx-background-radius: 20px;*/
+    /*-fx-border-radius: 20px;*/
+    /*-fx-background-radius: 30;*/
 
 }
-.box{
+
+.box {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-border-color: white;
     -fx-background-color: #4A9782;
 }
-.label{
+
+.label {
     -fx-text-fill: white;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
-.textBox{
+
+.textBox {
     -fx-text-fill: white;
     -fx-font-size: 15px;
     -fx-border-color: white;
@@ -27,12 +30,14 @@
     -fx-background-radius: 10px;
 
 }
-.pri{
+
+.pri {
     -fx-text-alignment: center;
     -fx-text-fill: #ffe500;
 
 }
-.button{
+
+.button {
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
     -fx-text-fill: white;
@@ -40,7 +45,8 @@
     -fx-border-width: 2px;
     -fx-font-size: 20px;
 }
-.cmbBox{
+
+.cmbBox {
     -fx-background-radius: 10px;
 
 }

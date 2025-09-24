@@ -22,5 +22,6 @@ module org.example.orm_final {
 
     exports org.example.orm_final;
     opens org.example.orm_final.view.instructor to javafx.base;
+    opens org.example.orm_final.view.label to javafx.base;
 
 }

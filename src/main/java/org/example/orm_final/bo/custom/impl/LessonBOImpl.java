@@ -16,6 +16,11 @@ public class LessonBOImpl implements LessonBO {
     LessonDAO lessonDAO= (LessonDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.Lesson);
 
     @Override
+    public String getNumOF() throws SQLException {
+        return lessonDAO.getNumOF();
+    }
+
+    @Override
     public List<DtoLesson> getAll() throws SQLException {
         List<DtoLesson> dtoLessons=new ArrayList<>();
         lessonDAO.getAll().forEach(lesson->{

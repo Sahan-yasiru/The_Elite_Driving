@@ -14,4 +14,6 @@ public interface InstructorBO extends SuperBO {
     public boolean delete(DtoInstructor entity)throws SQLException, IOException;
     public String getLastID()throws SQLException;
     public boolean ifExit(DtoInstructor entity) throws SQLException;
+    String getNumOF() throws SQLException;
+
 }
