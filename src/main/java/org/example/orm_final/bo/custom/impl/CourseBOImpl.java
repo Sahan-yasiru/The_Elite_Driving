@@ -4,6 +4,7 @@ import org.example.orm_final.bo.custom.CourseBO;
 import org.example.orm_final.bo.utill.converter.EtyDToConverter;
 import org.example.orm_final.dao.DAOFactory;
 import org.example.orm_final.dao.custom.CourseDAO;
+import org.example.orm_final.dao.custom.QueryDAO;
 import org.example.orm_final.dao.custom.impl.CourseDAOImpl;
 import org.example.orm_final.model.DtoCourse;
 
@@ -15,6 +16,13 @@ import java.util.List;
 public class CourseBOImpl implements CourseBO {
 
     CourseDAO courseDAO=(CourseDAOImpl) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.Course);
+    QueryDAO queryDAO=(QueryDAO)DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.Query);
+
+
+    @Override
+    public List<String> getCouJoinWithStuID(String studentID) {
+        return queryDAO.getCouJoinWithStuID(studentID);
+    }
 
     @Override
     public String getNumOF() throws SQLException {

@@ -47,12 +47,12 @@
             </VBox>
          </children>
       </GridPane>
-      <ImageView fitHeight="161.0" fitWidth="179.0" layoutX="1019.0" layoutY="24.0" AnchorPane.bottomAnchor="420.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="24.0">
-         <image>
-            <Image url="@../assets/images/Cute%20chatbot%20greeting%20people%20with%20computer.gif" />
-         </image>
-      </ImageView>
       <Label fx:id="clockFX" layoutX="678.0" layoutY="19.0" prefHeight="84.0" prefWidth="360.0" styleClass="lbl2" stylesheets="@../assets/CSS/dashBord.css" text="Label" AnchorPane.rightAnchor="200.0" />
       <Label fx:id="dateFX" layoutX="87.0" layoutY="15.0" prefHeight="91.0" prefWidth="343.0" styleClass="lbl2" stylesheets="@../assets/CSS/dashBord.css" text="Label" />
+      <ImageView fitHeight="507.0" fitWidth="622.0" layoutX="814.0" layoutY="73.0">
+         <image>
+            <Image url="@../assets/images/img.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

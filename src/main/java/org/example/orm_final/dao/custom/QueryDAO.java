@@ -5,5 +5,6 @@ import org.example.orm_final.dao.SuperDAO;
 import java.util.List;
 
 public interface QueryDAO extends SuperDAO {
- public List<Object[]> getStudentsWithCous();
+    public List<Object[]> getStudentsWithCous();
+    List<String> getCouJoinWithStuID(String studentID);
 }

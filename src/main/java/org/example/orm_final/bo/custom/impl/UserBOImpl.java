@@ -9,8 +9,8 @@ import org.example.orm_final.dao.DAOFactory;
 import org.example.orm_final.dao.custom.UserDAO;
 import org.example.orm_final.dao.util.BCryptHashing;
 import org.example.orm_final.entity.user.User;
-import org.example.orm_final.entity.user.DtoUser;
 import org.example.orm_final.entity.user.UserType;
+import org.example.orm_final.model.user.DtoUser;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,6 +28,13 @@ public class UserBOImpl implements UserBO {
     @Override
     public boolean ifExit(DtoUser dtoUser) {
         try {
+            if(userDAO.chackUserEmp()) {
+                System.out.println(userDAO.chackUserEmp());
+                if (dtoUser.getUserName().equals("ADMIN") && dtoUser.getPassWold().equals("ADMIN")) {
+                    userType = "ADMIN";
+                    return true;
+                }
+            }
             User user = new User();
             user.setUserName(dtoUser.getUserName());
             user.setPassWold(dtoUser.getPassWold());
@@ -102,11 +109,4 @@ public class UserBOImpl implements UserBO {
         }
     }
 
-    public static void main(String[] args) {
-        UserBOImpl userBO = new UserBOImpl();
-        DtoUser dtoUser = new DtoUser();
-        dtoUser.setPassWold("123");
-        dtoUser.setUserName("123");
-        System.out.println(userBO.ifExit(dtoUser));
-    }
 }

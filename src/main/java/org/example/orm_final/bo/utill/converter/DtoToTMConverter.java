@@ -1,14 +1,11 @@
 package org.example.orm_final.bo.utill.converter;
 
-import javafx.scene.layout.VBox;
-import org.example.orm_final.entity.user.DtoUser;
-import org.example.orm_final.entity.user.DtoUserType;
-import org.example.orm_final.model.DtoCourse;
-import org.example.orm_final.model.DtoInstructor;
-import org.example.orm_final.model.DtoLesson;
-import org.example.orm_final.model.DtoStudent;
+import org.example.orm_final.model.*;
+import org.example.orm_final.model.user.DtoUser;
+import org.example.orm_final.model.user.DtoUserType;
 import org.example.orm_final.view.CourseTM;
 import org.example.orm_final.view.LessonTM;
+import org.example.orm_final.view.PaymentTM;
 import org.example.orm_final.view.StudentTM;
 import org.example.orm_final.view.instructor.InstructorTM;
 import org.example.orm_final.view.label.TMLBL;
@@ -97,5 +94,15 @@ public class DtoToTMConverter {
         return studentTM;
 
 
+    }
+
+    public static PaymentTM getPaymentTM(DtoPayment dtoPayment) {
+        PaymentTM paymentTM=new PaymentTM();
+        paymentTM.setPaymentId(dtoPayment.getPaymentId());
+        paymentTM.setAmount(dtoPayment.getAmount());
+        paymentTM.setDate(dtoPayment.getDate());
+        paymentTM.setStudent_ID(dtoPayment.getStudent());
+
+        return paymentTM;
     }
 }

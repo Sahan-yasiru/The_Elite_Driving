@@ -255,8 +255,4 @@ public class StudentManagementController implements Initializable {
 //        reLode();
     }
 
-    public static void main(String[] args) {
-        boolean b1 = Pattern.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", "sahanyasiru460@gmail.com");
-        System.out.println(b1);
-    }
 }

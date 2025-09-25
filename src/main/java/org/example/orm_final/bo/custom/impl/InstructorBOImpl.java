@@ -79,8 +79,5 @@ public class InstructorBOImpl implements InstructorBO {
         return false;
     }
 
-    public static void main(String[] args) throws SQLException {
-
-    }
 
 }

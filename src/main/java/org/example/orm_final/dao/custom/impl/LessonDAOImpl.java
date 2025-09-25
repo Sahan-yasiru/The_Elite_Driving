@@ -116,35 +116,5 @@ public class LessonDAOImpl implements LessonDAO {
     }
 
 
-    public static void main(String[] args) {
-        DtoLesson dtoLesson = new DtoLesson();
-        dtoLesson.setLessonId("L004");
-        dtoLesson.setLessonName("pccc");
-        dtoLesson.setTime("pcc");
-        dtoLesson.setDate(LocalDate.now());
-
-        DtoInstructor instructor = new DtoInstructor();
-        instructor.setId("I001");
-        dtoLesson.setInstructor(instructor);
-
-        DtoCourse dtoCourse= new DtoCourse();
-        dtoCourse.setId("C001");
-        dtoLesson.setCourse(dtoCourse);
-
-        DtoStudent dtoStudent = new DtoStudent();
-        dtoStudent.setId("S001");
-        dtoLesson.setStudent(dtoStudent);
-        Session session=FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-
-
-        try {
-            session.persist(EtyDToConverter.getLessonEty(dtoLesson));
-            transaction.commit();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
 }

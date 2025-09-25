@@ -15,7 +15,8 @@ public interface CourseBO extends SuperBO {
     public boolean delete(DtoCourse dtoCourse)throws SQLException, IOException;
     public String getLastID()throws SQLException;
     public boolean ifExit(DtoCourse dtoCourse) throws SQLException;
-    String getNumOF() throws SQLException;
+    public String getNumOF() throws SQLException;
+    List<String> getCouJoinWithStuID(String studentID);
 
 
 }

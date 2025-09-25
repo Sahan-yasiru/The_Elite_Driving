@@ -29,7 +29,7 @@
                   <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#StudentManagement" onMouseEntered="#mouseEnterd" onMouseExited="#mouseExited" prefHeight="50.0" prefWidth="150.0" text="Student  " />
                   <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#CourseManagement" onMouseEntered="#mouseEnterd" onMouseExited="#mouseExited" prefHeight="50.0" prefWidth="150.0" text="Course  " />
                   <Button fx:id="btnUser" maxWidth="-Infinity" mnemonicParsing="false" onAction="#lordUserManagement" onMouseEntered="#mouseEnterd" onMouseExited="#mouseExited" prefHeight="50.0" prefWidth="150.0" text="User  " />
-                  <Button fx:id="btnUser1" maxWidth="-Infinity" mnemonicParsing="false" onAction="#lordUserManagement" onMouseEntered="#mouseEnterd" onMouseExited="#mouseExited" prefHeight="50.0" prefWidth="150.0" text="Payment  " />
+                  <Button fx:id="btnUser1" maxWidth="-Infinity" mnemonicParsing="false" onAction="#lordPaymentManagement" onMouseEntered="#mouseEnterd" onMouseExited="#mouseExited" prefHeight="50.0" prefWidth="150.0" text="Payment  " />
                </buttons>
                <opaqueInsets>
                   <Insets />

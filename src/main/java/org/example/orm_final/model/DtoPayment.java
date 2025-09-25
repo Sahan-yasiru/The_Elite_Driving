@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class DtoPayment {
     private String paymentId;
 
@@ -15,5 +16,5 @@ public class DtoPayment {
 
     private LocalDate date;
 
-    private DtoStudent student;
+    private String student;
 }

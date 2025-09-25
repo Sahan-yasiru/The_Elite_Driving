@@ -12,15 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import lombok.Getter;
-import lombok.Setter;
-import org.example.orm_final.bo.custom.UserBO;
 import org.example.orm_final.bo.custom.impl.UserBOImpl;
-import org.example.orm_final.entity.user.DtoUserType;
-import org.example.orm_final.entity.user.UserType;
+import org.example.orm_final.model.user.DtoUserType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -85,7 +80,9 @@ public class SideBarController implements Initializable {
         lordTempPages("DashBord.fxml");
     }
 
-
+    public void lordPaymentManagement(ActionEvent actionEvent) {
+        lordTempPages("Payment_managment.fxml");
+    }
     public void mouseEnterd(MouseEvent event) {
         if (event.getSource() instanceof ButtonBar) {
             ButtonBar bar = (ButtonBar) event.getSource();
@@ -141,4 +138,6 @@ public class SideBarController implements Initializable {
             button.setEffect(null);
         }
     }
+
+
 }

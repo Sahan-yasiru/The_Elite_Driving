@@ -61,11 +61,5 @@ public class LessonBOImpl implements LessonBO {
         return false;
     }
 
-    public static void main(String[] args) throws SQLException {
-        LessonBOImpl lessonBOImpl = new LessonBOImpl();
-        lessonBOImpl.lessonDAO.getAll().forEach(lesson->{
-            System.out.println(lesson.getInstructor());
-            System.out.println(lesson);
-        });
-    }
+
 }

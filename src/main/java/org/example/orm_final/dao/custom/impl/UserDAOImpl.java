@@ -16,6 +16,18 @@ public class UserDAOImpl implements UserDAO {
 
     private FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
 
+    @Override
+    public boolean chackUserEmp() throws SQLException{
+        Session session=factoryConfiguration.getSession();
+        try {
+            Query<Long> query=session.createQuery("SELECT count(*) FROM user c",Long.class);
+            Long count = query.uniqueResult();
+
+            return count == 0;
+        }finally {
+            session.close();
+        }
+    }
 
     @Override
     public User getType(int id) throws SQLException {
@@ -143,11 +155,6 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
-        UserDAOImpl userDAO = new UserDAOImpl();
-        User user = userDAO.getType(1);
-        System.out.println(user.getUserType());
-    }
 
 
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.metamodel.Metamodel;
 import javafx.application.Application;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -25,19 +26,34 @@ import java.util.Set;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/org/example/orm_final/FXML/Login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setResizable(false);
-        stage.setTitle("login");
-        stage.setScene(scene);
+        stage.setScene(new Scene(
+                new FXMLLoader(getClass().getResource("/org/example/orm_final/FXML/LoadinScreen.fxml")).load()
+        ));
+        stage.centerOnScreen();
         stage.show();
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/orm_final/FXML/SideBar.fxml"));
-////        Stage stage = new Stage();
-//        stage.setScene(new Scene(fxmlLoader.load()));
-//        stage.setMinWidth(1400.00);
-//        stage.setMinHeight(716.00);
-//        stage.setResizable(true);
-//        stage.show();
+
+        Task<Scene> loadingTask = new Task<>() {
+            @Override
+            protected Scene call() throws Exception {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/orm_final/FXML/Login.fxml"));
+                return new Scene(fxmlLoader.load());
+            }
+        };
+
+        loadingTask.setOnSucceeded(event -> {
+            Scene value = loadingTask.getValue();
+
+            stage.setTitle("Login");
+            stage.setScene(value);
+            stage.setResizable(false);
+            stage.centerOnScreen();
+        });
+
+        loadingTask.setOnFailed(event -> {
+            System.out.println("Fail to load application");
+        });
+
+        new Thread(loadingTask).start();
     }
 
 

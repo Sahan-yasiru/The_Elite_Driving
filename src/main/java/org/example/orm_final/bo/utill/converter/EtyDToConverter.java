@@ -1,17 +1,11 @@
 package org.example.orm_final.bo.utill.converter;
 
-import org.example.orm_final.entity.Course;
-import org.example.orm_final.entity.Instructor;
-import org.example.orm_final.entity.Lesson;
-import org.example.orm_final.entity.Student;
+import org.example.orm_final.entity.*;
 import org.example.orm_final.entity.user.User;
 import org.example.orm_final.entity.user.UserType;
-import org.example.orm_final.entity.user.DtoUser;
-import org.example.orm_final.entity.user.DtoUserType;
-import org.example.orm_final.model.DtoCourse;
-import org.example.orm_final.model.DtoInstructor;
-import org.example.orm_final.model.DtoLesson;
-import org.example.orm_final.model.DtoStudent;
+import org.example.orm_final.model.*;
+import org.example.orm_final.model.user.DtoUser;
+import org.example.orm_final.model.user.DtoUserType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +13,7 @@ import java.util.List;
 public class EtyDToConverter {
 
 
-    public static DtoUser getUserDto(User ety){
+    public static DtoUser getUserDto(User ety) {
         DtoUser dtoUser = new DtoUser();
         dtoUser.setId(ety.getId());
         dtoUser.setUserName(ety.getUserName());
@@ -30,7 +24,7 @@ public class EtyDToConverter {
         return dtoUser;
     }
 
-    public static User getUserEty(DtoUser dtoUser){
+    public static User getUserEty(DtoUser dtoUser) {
         User user = new User();
         user.setId(dtoUser.getId());
         user.setUserName(dtoUser.getUserName());
@@ -40,20 +34,21 @@ public class EtyDToConverter {
                 : UserType.Receptionist);
         return user;
     }
-    public static DtoLesson getLessonDto(Lesson lesson){
+
+    public static DtoLesson getLessonDto(Lesson lesson) {
         DtoLesson dtoLesson = new DtoLesson();
-        
+
         dtoLesson.setLessonId(lesson.getLessonId());
         dtoLesson.setLessonName(lesson.getLessonName());
         dtoLesson.setTime(lesson.getTime());
         dtoLesson.setDate(lesson.getDate());
-        if(lesson.getInstructor()!=null) {
+        if (lesson.getInstructor() != null) {
             dtoLesson.setInstructor(getInstructorDto(lesson.getInstructor()));
         }
-        if(lesson.getCourse()!=null) {
+        if (lesson.getCourse() != null) {
             dtoLesson.setCourse(getCourseDto(lesson.getCourse()));
         }
-        if(lesson.getStudent()!=null) {
+        if (lesson.getStudent() != null) {
             dtoLesson.setStudent(getStudentDto(lesson.getStudent()));
         }
         return dtoLesson;
@@ -108,8 +103,8 @@ public class EtyDToConverter {
         dtoInstructor.setId(instructor.getId());
         dtoInstructor.setEmail(instructor.getEmail());
         dtoInstructor.setName(instructor.getName());
-        List<String> ids=new ArrayList<>();
-        instructor.getLessons().forEach(lesson->{
+        List<String> ids = new ArrayList<>();
+        instructor.getLessons().forEach(lesson -> {
             ids.add(lesson.getLessonId());
         });
         dtoInstructor.setLessons(ids);
@@ -122,11 +117,11 @@ public class EtyDToConverter {
         dtoInstructor.setId(instructor.getId());
         dtoInstructor.setEmail(instructor.getEmail());
         dtoInstructor.setName(instructor.getName());
-        List<String> ids=new ArrayList<>();
-        if(!instructor.getLessons().isEmpty()){
+        List<String> ids = new ArrayList<>();
+        if (!instructor.getLessons().isEmpty()) {
 
         }
-        instructor.getLessons().forEach(lesson->{
+        instructor.getLessons().forEach(lesson -> {
             ids.add(lesson.getLessonId());
         });
         dtoInstructor.setLessons(ids);
@@ -140,8 +135,8 @@ public class EtyDToConverter {
         instructor.setId(dto.getId());
         instructor.setEmail(dto.getEmail());
         instructor.setName(dto.getName());
-        List<Lesson> lessons =new ArrayList<>();
-        if(dto.getLessons()!= null) {
+        List<Lesson> lessons = new ArrayList<>();
+        if (dto.getLessons() != null) {
             dto.getLessons().forEach(ids -> {
                 Lesson lesson = new Lesson();
                 lesson.setLessonId(ids);
@@ -158,9 +153,9 @@ public class EtyDToConverter {
         dtoCourse.setFree(course.getFree());
         dtoCourse.setDuration(course.getDuration());
         dtoCourse.setDescription(course.getDescription());
-        if(course.getLessons()!=null) {
+        if (course.getLessons() != null) {
             List<String> lessonIDs = new ArrayList<>();
-            course.getLessons().forEach(lesson->{
+            course.getLessons().forEach(lesson -> {
                 lessonIDs.add(lesson.getLessonId());
             });
             dtoCourse.setLessons(lessonIDs);
@@ -175,7 +170,7 @@ public class EtyDToConverter {
         course.setDuration(dtoCourse.getDuration());
         course.setDescription(dtoCourse.getDescription());
         List<Lesson> lessonID = new ArrayList<>();
-        if(dtoCourse.getLessons()!=null) {
+        if (dtoCourse.getLessons() != null) {
             dtoCourse.getLessons().forEach(ids -> {
                 Lesson lesson = new Lesson();
                 lesson.setLessonId(ids);
@@ -184,9 +179,8 @@ public class EtyDToConverter {
         }
 
 
-        return  course;
+        return course;
     }
-
 
 
     public static Lesson getLessonEty(DtoLesson dtoLesson) {
@@ -196,20 +190,20 @@ public class EtyDToConverter {
         lesson.setLessonName(dtoLesson.getLessonName());
         lesson.setTime(dtoLesson.getTime());
         lesson.setDate(dtoLesson.getDate());
-        if(dtoLesson.getInstructor()!=null) {
+        if (dtoLesson.getInstructor() != null) {
             lesson.setInstructor(getInstructorEty(dtoLesson.getInstructor()));
         }
-        if(dtoLesson.getCourse()!=null) {
+        if (dtoLesson.getCourse() != null) {
             lesson.setCourse(getCourseEty(dtoLesson.getCourse()));
         }
-        if(dtoLesson.getStudent()!=null) {
+        if (dtoLesson.getStudent() != null) {
             lesson.setStudent(getStudentETY(dtoLesson.getStudent()));
         }
         return lesson;
     }
 
     private static Student getStudentETY(DtoStudent dtoStudent) {
-        Student student=new Student();
+        Student student = new Student();
         student.setId(dtoStudent.getId());
         student.setName(dtoStudent.getName());
         student.setEmail(dtoStudent.getEmail());
@@ -223,7 +217,7 @@ public class EtyDToConverter {
         student.setEmail(dtoStudent.getEmail());
         student.setPhoneNumber(dtoStudent.getPhoneNumber());
 
-        if(dtoStudent.getCourses()!=null) {
+        if (dtoStudent.getCourses() != null) {
             List<Course> courses = new ArrayList<>();
             dtoStudent.getCourses().forEach(id -> {
                 Course course = new Course();
@@ -232,5 +226,15 @@ public class EtyDToConverter {
             student.setCourses(courses);
         }
         return student;
+    }
+
+    public static DtoPayment getPaymentDTO(Payment payment) {
+        DtoPayment dtoPayment = new DtoPayment();
+        dtoPayment.setPaymentId(payment.getPaymentId());
+        dtoPayment.setDate(payment.getDate());
+        dtoPayment.setAmount(payment.getAmount());
+        dtoPayment.setStudent(payment.getStudent().getId());
+        return dtoPayment;
+
     }
 }

@@ -17,6 +17,7 @@ public class DAOFactory {
         Lesson,
         Student,
         Query,
+        Payment
     }
     public SuperDAO getDAO(DAOTypes daoType){
         switch (daoType){
@@ -37,6 +38,9 @@ public class DAOFactory {
             }
             case Query -> {
                 return new QuryDAOImpl();
+            }
+            case Payment -> {
+                return new PaymentDAOImpl();
             }
 
             default -> {

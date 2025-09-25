@@ -10,5 +10,6 @@ public interface UserDAO extends CrudDAO<User> {
     User ifExitSP(User user) throws Exception;
 
     User getType(int id) throws SQLException;
+    boolean chackUserEmp()throws SQLException;
 
 }
